@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Houseplant care tracker</title>
+        <style>
+            table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+        </style>
+    </head>
+    <body>
+      <h2>Add a plant</h2>
+      <br>
+
+
+    <div>
+        <h3> {{ plant.houseplant_name }} </h3>
+        <table style="float:left">
+            <tr>
+                <th>Species:</th>
+                <td> {{ plant.species }}</td>
+            
+            </tr>
+            <tr>
+                <th>Family:</th>
+                <td>{{ plant.family }}</td>
+            </tr>
+            <tr>
+                <th>Date acquired:</th>
+                <td> {{ plant.date_acquired }} </td>
+            
+            </tr>
+            <tr>
+                <th>Source:</th>
+                <td>{{ plant.source }}</td>
+            </tr>
+            </table>
+        </div>
+            <br>
+            <form action= "{{ url_for ('delete_plant', plant_id = plant.id) }}" method="POST">
+            <input type="submit" value="Delete">
+            </form>
+ 
+  </body>
+</html>
+    </body>
+</html>
+ 

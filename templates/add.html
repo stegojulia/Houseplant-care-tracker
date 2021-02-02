@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Houseplant care tracker</title>
+    </head>
+    <body>
+      <h2>{{ legend }}</h2>
+      <br>
+      <div>
+          <form method ="POST" action="">
+                {{ form.hidden_tag() }}
+                {{ form.houseplant_name.label }}
+                {{ form.houseplant_name}}
+                <br>
+                {{ form.species.label }}
+                {{ form.species }}
+                <br>
+                {{ form.family.label}}
+                {{ form.family}}
+                <br>
+                {{ form.date_acquired.label}}
+                {{ form.date_acquired}}
+                <br>
+                {{ form.source.label}}
+                {{ form.source}}
+
+                {{ form.submit }}
+              
+
+          </form>
+      </div>
+
+      <br>
+
+      <!--{% for plant in plants %}
+      <tr>
+        <td>
+          {{ plant.houseplant_name }} 
+        </td>
+        <br>
+      
+      </tr>
+      {% endfor %}
+  </table>-->
+  </body>
+</html>
+    </body>
+</html>
+ 

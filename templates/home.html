@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Houseplant care tracker</title>
+    </head>
+    <body>
+      <h2>Houseplant care tracker</h2>
+      <br>
+      <button onclick="location.href='add'" type="button">
+        Add plant</button>
+      <br>
+
+    <h2>Plants</h2>
+    <table>
+      {% for plant in plants %}
+        <tr>
+          <td>
+            <a href="{{ url_for('plant', plant_id=plant.id) }}"> {{ plant.houseplant_name }} </a>
+          </td>
+        
+        </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>
+    </body>
+</html>
