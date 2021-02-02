@@ -51,6 +51,7 @@ def add():
         plant = Houseplants(houseplant_name=form.houseplant_name.data, species=form.species.data, family=form.family.data, date_acquired =form.date_acquired.data, source=form.source.data)
         db.session.add(plant)
         db.session.commit()
+        return redirect(url_for('home'))
     plants = Houseplants.query.all()
     return render_template('add.html', title='Add plant', form=form, plants=plants, legend = "Add a plant")
 
