@@ -17,7 +17,8 @@ td, th {
         </style>
     </head>
     <body>
-      <h2>Add a plant</h2>
+        <a href="/home">Home</a>
+       <h2>{{ legend }}</h2>
       <br>
 
 
@@ -42,6 +43,12 @@ td, th {
                 <th>Source:</th>
                 <td>{{ plant.source }}</td>
             </tr>
+            <tr>
+                <th>Last watered:</th>
+                <td>{{ latest_watering.date}}</td>
+            </tr>
+            
+
             </table>
 
             <br>
@@ -52,7 +59,12 @@ td, th {
             <form action= "{{ url_for ('delete_plant', plant_id = plant.id) }}" method="POST">
             <input type="submit" value="Delete">
             </form>
+            <br>
+            <form action= "{{ url_for ('water_plant', plant_id = plant.id) }}" method="POST">
+                <input type="submit" value="Water">
+                            
 
+            </form>
   </body>
 </html>
     </body>

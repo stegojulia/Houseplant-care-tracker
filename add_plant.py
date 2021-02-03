@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+import datetime
 from datetime import date
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -10,20 +11,6 @@ app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
 db = SQLAlchemy(app)
 
-class NullableDateField(DateField):
-    """Native WTForms DateField throws error for empty dates.
-    Let's fix this so that we could have DateField nullable."""
-    def process_formdata(self, valuelist):
-        if valuelist:
-            date_str = ' '.join(valuelist).strip()
-            if date_str == '':
-                self.data = None
-                return
-            try:
-                self.data = datetime.date.strptime(date_str, self.format).date()
-            except ValueError:
-                self.data = None
-                raise ValueError(self.gettext('Not a valid date value'))
 
 class Houseplants(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,16 +19,25 @@ class Houseplants(db.Model):
     family = db.Column(db.String(45))
     date_acquired = db.Column(db.Date)
     source = db.Column(db.String(45))
+    waterings = db.relationship('Waterings', backref='houseplants')
 
     def __repr__(self):
         return f"Houseplants('{self.id}', '{self.houseplant_name}', '{self.species}', '{self.family}', '{self.date_acquired}', '{self.source}'"
 
-#class Waterings(db.Model):
-#    watering_id = db.Column(db.Integer, primary_key=True)
-#    plant_id = db.Column(db.Integer), db.ForeignKey('houseplants.id', nullable=False)
+class Waterings(db.Model):
+    watering_id = db.Column(db.Integer, primary_key=True)
+    plant_id = db.Column(db.Integer, db.ForeignKey('houseplants.id'), nullable=False)
+    date = db.Column(db.Date)
+
+    def __repr__(self):
+        return f"Waterings('{self.watering_id}', '{self.date}'"
+
 
 #db.drop_all()
 db.create_all()
+#db.session.commit()
+
+test_plant = Houseplants(houseplant_name='begonia')
 
 
 ##form to add houseplants
@@ -65,7 +61,7 @@ def home():
 @app.route("/add", methods=['GET', 'POST'])
 def add():
     form = AddHouseplantForm()
-    if form.is_submitted():
+    if form.validate_on_submit():
         plant = Houseplants(houseplant_name=form.houseplant_name.data, species=form.species.data, family=form.family.data, date_acquired =form.date_acquired.data, source=form.source.data)
         db.session.add(plant)
         db.session.commit()
@@ -76,7 +72,13 @@ def add():
 @app.route("/plant/<int:plant_id>")
 def plant(plant_id):    
     plant = Houseplants.query.get_or_404(plant_id)
-    return render_template('plant.html', title=plant.houseplant_name, plant=plant, plant_id = plant.id)
+    try:
+        all_waterings = Waterings.query.filter_by(plant_id=plant_id).order_by(Waterings.date)
+        latest_watering = all_waterings[-1]
+    except:
+        latest_watering = 'not watered'  
+    return render_template('plant.html', title=plant.houseplant_name, plant=plant, plant_id = plant.id, latest_watering=latest_watering)
+
 
 @app.route("/plant/<int:plant_id>/update", methods=['GET', 'POST'])
 def update_plant(plant_id):
@@ -104,12 +106,12 @@ def delete_plant(plant_id):
     db.session.commit()
     return redirect(url_for('home', plant_id = plant.id))
 
-#@app.route("/plant/<int:plant_id>/water", methods=['POST'])
-#def water_plant(plant_id):
-#    watering = Waterings(plant_id=plant_id)
-#    db.session.add(watering)
-#    db.session.commit()
-#    return redirect(url_for('home', plant_id = plant.id))
+@app.route("/plant/<int:plant_id>/water", methods=['POST'])
+def water_plant(plant_id):
+    watering = Waterings(plant_id=plant_id,date=datetime.datetime.now())
+    db.session.add(watering)
+    db.session.commit()
+    return redirect(url_for('plant', plant_id = plant_id))
 
 if __name__ == '__main__':
      app.run(debug=True, host='0.0.0.0')
