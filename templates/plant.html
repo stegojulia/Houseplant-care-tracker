@@ -21,7 +21,7 @@ td, th {
       <br>
 
 
-    <div>
+
         <h3> {{ plant.houseplant_name }} </h3>
         <table style="float:left">
             <tr>
@@ -43,12 +43,16 @@ td, th {
                 <td>{{ plant.source }}</td>
             </tr>
             </table>
-        </div>
+
+            <br>
+            <form action= "{{ url_for ('update_plant', plant_id = plant.id) }}" method="GET">
+                <input type="submit" value="Update">
+                </form>
             <br>
             <form action= "{{ url_for ('delete_plant', plant_id = plant.id) }}" method="POST">
             <input type="submit" value="Delete">
             </form>
- 
+
   </body>
 </html>
     </body>

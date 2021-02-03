@@ -3,12 +3,27 @@ from datetime import date
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DateField
+from wtforms.validators import DataRequired, Length
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
 db = SQLAlchemy(app)
 
+class NullableDateField(DateField):
+    """Native WTForms DateField throws error for empty dates.
+    Let's fix this so that we could have DateField nullable."""
+    def process_formdata(self, valuelist):
+        if valuelist:
+            date_str = ' '.join(valuelist).strip()
+            if date_str == '':
+                self.data = None
+                return
+            try:
+                self.data = datetime.date.strptime(date_str, self.format).date()
+            except ValueError:
+                self.data = None
+                raise ValueError(self.gettext('Not a valid date value'))
 
 class Houseplants(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,6 +36,9 @@ class Houseplants(db.Model):
     def __repr__(self):
         return f"Houseplants('{self.id}', '{self.houseplant_name}', '{self.species}', '{self.family}', '{self.date_acquired}', '{self.source}'"
 
+#class Waterings(db.Model):
+#    watering_id = db.Column(db.Integer, primary_key=True)
+#    plant_id = db.Column(db.Integer), db.ForeignKey('houseplants.id', nullable=False)
 
 #db.drop_all()
 db.create_all()
@@ -29,10 +47,10 @@ db.create_all()
 ##form to add houseplants
 
 class AddHouseplantForm(FlaskForm):
-    houseplant_name = StringField('Houseplant name')
+    houseplant_name = StringField('Houseplant name', validators=[Length(min=3, max=20, message='Houseplant name has to be between 3 and 20 characters'), DataRequired()])
     species = StringField('Species')
     family = StringField('Family')
-    date_acquired = DateField('Data acquired')
+    date_acquired = DateField('Date acquired (YYYY-MM-DD)',format='%Y-%m-%d')
     source = StringField('Source')
     submit = SubmitField('Add')
 
@@ -85,6 +103,13 @@ def delete_plant(plant_id):
     db.session.delete(plant)
     db.session.commit()
     return redirect(url_for('home', plant_id = plant.id))
+
+#@app.route("/plant/<int:plant_id>/water", methods=['POST'])
+#def water_plant(plant_id):
+#    watering = Waterings(plant_id=plant_id)
+#    db.session.add(watering)
+#    db.session.commit()
+#    return redirect(url_for('home', plant_id = plant.id))
 
 if __name__ == '__main__':
      app.run(debug=True, host='0.0.0.0')

@@ -24,8 +24,18 @@
                 {{ form.source}}
 
                 {{ form.submit }}
-              
-
+                <br>
+                {% for field, errors in form.errors.items() if field==houseplant_name %}
+                {{ ' '.join(errors) }}
+                {% endfor %}
+                <br>
+                {% for field, errors in form.errors.items() if field==date_acquired and len(form.date_acquired) >0 %}
+                {{ ' '.join(errors) }}
+                {% endfor %}
+                <br>
+                {% for field, errors in form.errors.items() %}
+                {{ ' '.join(errors) }}
+                {% endfor %}
           </form>
       </div>
 
