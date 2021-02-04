@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>Houseplant care tracker</title>
+    </head>
+    <body>
+      <a href="/home">Home</a>
+      <a href="{{ url_for('plant', plant_id=plant.id) }}">Back to the plant</a>
+      <h2>{{ legend }} : {{ plant.houseplant_name }}</h2>
+      <br>
+      <h4>Water the plant:</h4>
+      <form method ="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.watering_date.label }}
+        {{ form.watering_date}}
+        <br>
+        {{ form.submit }}
+        </form>
+ <br><br>
+
+      <div>
+        <table>
+          <th><h4>Watering records</h4></th>
+            {% for watering in all_waterings %}
+              <tr>
+                <td>
+                   {{ watering.date }} <a href="{{ url_for('delete_care', watering_id=watering.watering_id) }}">X</a>
+                </td>
+              {% endfor %}
+            </table>
+      </div>
+
+      <br>
+
+  </body>
+</html>
+
+ 

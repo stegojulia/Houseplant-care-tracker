@@ -32,15 +32,11 @@ class Waterings(db.Model):
     def __repr__(self):
         return f"Waterings('{self.watering_id}', '{self.date}'"
 
-
-#db.drop_all()
 db.create_all()
-#db.session.commit()
-
-test_plant = Houseplants(houseplant_name='begonia')
 
 
-##form to add houseplants
+
+#Forms
 
 class AddHouseplantForm(FlaskForm):
     houseplant_name = StringField('Houseplant name', validators=[Length(min=3, max=20, message='Houseplant name has to be between 3 and 20 characters'), DataRequired()])
@@ -50,8 +46,9 @@ class AddHouseplantForm(FlaskForm):
     source = StringField('Source')
     submit = SubmitField('Add')
 
-
-@app.route("/")
+class WaterPlantForm(FlaskForm):
+    watering_date = DateField('Watering date (YYYY-MM-DD)', format='%Y-%m-%d', default=datetime.datetime.now())
+    submit = SubmitField('Water')
 
 @app.route("/home")
 def home():
@@ -102,16 +99,31 @@ def update_plant(plant_id):
 @app.route("/plant/<int:plant_id>/delete", methods=['POST'])
 def delete_plant(plant_id):
     plant = Houseplants.query.get_or_404(plant_id)
+    all_waterings = Waterings.query.filter_by(plant_id=plant_id)
+    for water in all_waterings:
+        db.session.delete(water)
     db.session.delete(plant)
     db.session.commit()
-    return redirect(url_for('home', plant_id = plant.id))
+    return redirect(url_for('home'))
 
-@app.route("/plant/<int:plant_id>/water", methods=['POST'])
-def water_plant(plant_id):
-    watering = Waterings(plant_id=plant_id,date=datetime.datetime.now())
-    db.session.add(watering)
+@app.route("/plant/<int:plant_id>/care", methods=['GET', 'POST'])
+def care(plant_id):
+    plant = Houseplants.query.get_or_404(plant_id)
+    all_waterings = Waterings.query.filter_by(plant_id=plant_id).order_by(Waterings.date.desc())
+    form = WaterPlantForm()
+    if form.validate_on_submit():
+        new_watering = Waterings(plant_id=plant_id, date=form.watering_date.data)
+        db.session.add(new_watering)
+        db.session.commit()
+    return render_template('care.html', all_waterings=all_waterings, plant=plant, form=form, legend="Care sheet")
+
+@app.route("/plant/<int:watering_id>/delete", methods=['GET','POST'])
+def delete_care(watering_id):
+    watering = Waterings.query.get_or_404(watering_id)
+    db.session.delete(watering)
     db.session.commit()
-    return redirect(url_for('plant', plant_id = plant_id))
+    return redirect(url_for('care', plant_id = watering.plant_id))
 
 if __name__ == '__main__':
      app.run(debug=True, host='0.0.0.0')
+
