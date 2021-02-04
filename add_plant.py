@@ -61,7 +61,7 @@ def home():
 @app.route("/add", methods=['GET', 'POST'])
 def add():
     form = AddHouseplantForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit() or (len(form.errors.items())==1 and [field for field,error in form.errors.items()][0]=='date_acquired'):
         plant = Houseplants(houseplant_name=form.houseplant_name.data, species=form.species.data, family=form.family.data, date_acquired =form.date_acquired.data, source=form.source.data)
         db.session.add(plant)
         db.session.commit()
