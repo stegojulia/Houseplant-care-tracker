@@ -1,7 +1,7 @@
 # Houseplants care app
 The idea for this project was born when I was looking for a system to track the care of my collection of plants. Tracking of activities such as watering, fertilising and repotting is useful because it allows a gardener to gather data about the plants to learn more about their care, ensure that plants are not overwatered or overfertilised, and facilitates producing accurate care instructions, for example if I had to travel and need someone else to look after my collection.
 
-#Design
+# Design
 
 ## Project specification
 This project's objective is to create a CRUD web application with Python and Flask. The project aimed to demonstrate proficiency in a range of concepts and skills, including:
@@ -16,7 +16,7 @@ This project's objective is to create a CRUD web application with Python and Fla
 * Cloud Fundamentals
 * Databases
 
-## Reality check
+## Scope
 An important aspect of the project was to adjust the level of complexity of the app to fit into the scope of the project. This required brainstorming any possible functions and prioritising the essential ones. Two key elements emerged:
 * Storing general information about plants, which can be updated and deleted if required
 * Storing information about the watering schedule
@@ -24,6 +24,7 @@ An important aspect of the project was to adjust the level of complexity of the 
 ## Database design
 The essential elements of the database were established in advance and visualised with an ERD chart, which demonstrates the relationship between the tables. Additional tables can be added in the future as more features are added to the app. The ERD was designed with Lucidchart.
 
+![erd](<iframe src="https://onedrive.live.com/embed?cid=89A0A160C2C9736C&resid=89A0A160C2C9736C%213157&authkey=AFp27pHv5OHQU14" width="320" height="212" frameborder="0" scrolling="no"></iframe>)
 
 ## Project management
 A Trello board was the main project management tool used. The board developed along with the project as my knowledge increased. Initially, it only included user stories with main features. Later I was able to decompose each story into smaller tasks. In addition to the MVP elements, I also added additional tasks which can be carried out to expand the app. I updated the board daily. Several times it became clear that what I initially thought was essential was not as important - and vice versa, so I adjusted the plan accordingly.
