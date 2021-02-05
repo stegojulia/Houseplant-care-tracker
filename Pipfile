@@ -11,6 +11,7 @@ wtforms = "*"
 flask-sqlalchemy = "*"
 pymysql = "*"
 gunicorn = "*"
+flask-testing = "*"
 
 [dev-packages]
 

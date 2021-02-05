@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, Length
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///site.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://julia:julia123@localhost/houseplants"
 db = SQLAlchemy(app)
 
 
@@ -21,16 +21,16 @@ class Houseplants(db.Model):
     source = db.Column(db.String(45))
     waterings = db.relationship('Waterings', backref='houseplants')
 
-    def __repr__(self):
-        return f"Houseplants('{self.id}', '{self.houseplant_name}', '{self.species}', '{self.family}', '{self.date_acquired}', '{self.source}'"
+    #def __repr__(self):
+    #    return f"Houseplants('{self.id}', '{self.houseplant_name}', '{self.species}', '{self.family}', '{self.date_acquired}', '{self.source}'"
 
 class Waterings(db.Model):
     watering_id = db.Column(db.Integer, primary_key=True)
     plant_id = db.Column(db.Integer, db.ForeignKey('houseplants.id'), nullable=False)
     date = db.Column(db.Date)
 
-    def __repr__(self):
-        return f"Waterings('{self.watering_id}', '{self.date}'"
+    #def __repr__(self):
+    #    return f"Waterings('{self.watering_id}', '{self.date}'"
 
 db.create_all()
 
