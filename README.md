@@ -24,7 +24,9 @@ An important aspect of the project was to adjust the level of complexity of the 
 ## Database design
 The essential elements of the database were established in advance and visualised with an ERD chart, which demonstrates the relationship between the tables. Additional tables can be added in the future as more features are added to the app. The ERD was designed with Lucidchart.
 
-![erd](<iframe src="https://onedrive.live.com/embed?cid=89A0A160C2C9736C&resid=89A0A160C2C9736C%213157&authkey=AFp27pHv5OHQU14" width="320" height="212" frameborder="0" scrolling="no"></iframe>)
+<img src="Images/Houseplant Tracker - QA Project_1.png" alt="drawing" style="width:20;">
+
+![erd](Images/Houseplant Tracker - QA Project_1.png)
 
 ## Project management
 A Trello board was the main project management tool used. The board developed along with the project as my knowledge increased. Initially, it only included user stories with main features. Later I was able to decompose each story into smaller tasks. In addition to the MVP elements, I also added additional tasks which can be carried out to expand the app. I updated the board daily. Several times it became clear that what I initially thought was essential was not as important - and vice versa, so I adjusted the plan accordingly.
