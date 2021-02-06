@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 
 class Houseplants(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    houseplant_name = db.Column(db.String(45), nullable=False, unique = True)
+    houseplant_name = db.Column(db.String(45), nullable=False)
     species = db.Column(db.String(45))
     family = db.Column(db.String(45))
     date_acquired = db.Column(db.Date)
@@ -50,7 +50,7 @@ class WaterPlantForm(FlaskForm):
     watering_date = DateField('Watering date (YYYY-MM-DD)', format='%Y-%m-%d', default=datetime.datetime.now())
     submit = SubmitField('Water')
 
-@app.route("/home")
+@app.route("/")
 def home():
     plants = Houseplants.query.all()
     return render_template('home.html', plants=plants)
@@ -59,7 +59,9 @@ def home():
 def add():
     form = AddHouseplantForm()
     if form.validate_on_submit() or (len(form.errors.items())==1 and [field for field,error in form.errors.items()][0]=='date_acquired'):
-        plant = Houseplants(houseplant_name=form.houseplant_name.data, species=form.species.data, family=form.family.data, date_acquired =form.date_acquired.data, source=form.source.data)
+        plant = Houseplants(
+            houseplant_name=form.houseplant_name.data, species=form.species.data, family=form.family.data, date_acquired =form.date_acquired.data, source=form.source.data
+            )
         db.session.add(plant)
         db.session.commit()
         return redirect(url_for('home'))
