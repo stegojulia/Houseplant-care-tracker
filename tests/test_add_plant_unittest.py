@@ -1,7 +1,8 @@
 import unittest
 from flask_testing import TestCase
 from flask import url_for
-from datetime import datetime
+import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 from application import app, db
 from application.models import Houseplants, Waterings
@@ -9,17 +10,18 @@ from application.models import Houseplants, Waterings
 class TestBase(TestCase):
 
     def create_app(self):
-        app.config['SQLALchemy_DATABASE_URI'] = "sqlite:///"
-        SECRET_KEY='KEY'
+        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
+                SECRET_KEY='TEST_SECRET_KEY',
+                DEBUG=True
+                )
         return app
     
     def setUp(self):
-        db.drop_all()
         db.create_all()
         plant1 = Houseplants(houseplant_name='philodendron')
         db.session.add(plant1)
         db.session.commit()
-        watering1 = Waterings(plant_id=1, date='2020-12-12')
+        watering1 = Waterings(plant_id=1, date=datetime.date(2019, 12, 4))
         db.session.add(watering1)
         db.session.commit()
     
@@ -56,7 +58,7 @@ class TestDelete(TestBase):
         
 class TestCare(TestBase):
     def test_care(self):
-        response = self.client.post(url_for('care', plant_id=1),data = dict(plant_id=1, date='2019-12-01'), follow_redirects=True)
+        response = self.client.post(url_for('care', plant_id=1),data = dict(plant_id=1, date=datetime.date(2019, 12, 4)), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
 class TestDeleteCare(TestBase):
