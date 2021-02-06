@@ -24,22 +24,30 @@ An important aspect of the project was to adjust the level of complexity of the 
 ## Database design
 The essential elements of the database were established in advance and visualised with an ERD chart, which demonstrates the relationship between the tables. Additional tables can be added in the future as more features are added to the app. The ERD was designed with Lucidchart.
 
-<img src="Images/Houseplant Tracker - QA Project_1.png" alt="drawing" style="width:20;">
+<img src="Images/Houseplant Tracker - QA Project_1.png" alt="ERD" style="width:20;">
 
-![erd](Images/Houseplant Tracker - QA Project_1.png)
 
-## Project management
+# Project management
+
+## Workflow
 A Trello board was the main project management tool used. The board developed along with the project as my knowledge increased. Initially, it only included user stories with main features. Later I was able to decompose each story into smaller tasks. In addition to the MVP elements, I also added additional tasks which can be carried out to expand the app. I updated the board daily. Several times it became clear that what I initially thought was essential was not as important - and vice versa, so I adjusted the plan accordingly.
+
+<img src="Images/trello" alt="Trello-board" style="width:20;">
+
+## CI Pipeline
 
 ## Risk assessment
 
 
-![risk-assesssmentmatrix](https://db3pap004files.storage.live.com/y4pI2uLNleUVprStaCHnqjIHZZ4bTBKIN05T3oU2m3Z0RVaR_YdEen41bPtLNA5rwBfM8oQg1bLDwkTpkSmP6WJSFjnzaQsmMOB2z6zE0K01J59kl5zPufkBn80MRUSji0zOV2ce3sMYqwjpXrfR3PGB9rPDZuh5gEg84UFHLcaObliZH2k4Vt7LABM-fzF_6iUWFV3adlTEscfF_EoZc_B3H_ZEvKxFNxfWs4sRzWDsLM/risk-assessment-matrix.png?psid=1&width=941&height=670)
+<img src="Images/risk-assessment-matrix.png" alt="risk assessment matrix" class="center" style="width:20;">
+
+<img src="Images/risk-assessment-list.png" alt="risk assessment list" class="center" style="width:20;">
 
 ## Unit testing
 
+Unit testing with Pytest was implemented for automated testing of the CRUD functionality. A coverage of 80% was achieved.
 
-## Deployment with Jenkins
+<img src="Images/unit-test.png" alt="risk assessment list" class="center" style="width:20;">
 
 
 ## Challenges and solutions
@@ -47,6 +55,13 @@ A Trello board was the main project management tool used. The board developed al
 ## What I would have done differently
 
 ## Possible additions and improvements
+
+* Search bar.
+* More care features (fertilising, repotting, pruning, pest control).
+* Adding images representing the plants and their condition.
+* Editable fields to customise the information that can be entered in the plant records.
+* Predicting houseplants to be watered soon based on past watering frequency.
+* Mobile app.
 
 ## Versions
 v.1.0 includes a basic version of the watering feature. It enables the user to 'water' a plant (i.e. add a watering record linked to the record of a houseplant) with one click of the button. The watering date is assumed to be today's date, and the last watering date becomes visible in the plant record.
