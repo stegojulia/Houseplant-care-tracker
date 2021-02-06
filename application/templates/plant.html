@@ -16,19 +16,16 @@ td, th {
 
         </style>
     </head>
+
     <body>
-        <a href="/home">Home</a>
-       <h2>{{ legend }}</h2>
+        <a href="/">Home</a>
+        <h2>{{ legend }}</h2>
       <br>
-
-
-
         <h3> {{ plant.houseplant_name }} </h3>
         <table style="float:left">
             <tr>
                 <th>Species:</th>
                 <td> {{ plant.species }}</td>
-            
             </tr>
             <tr>
                 <th>Family:</th>
@@ -37,7 +34,6 @@ td, th {
             <tr>
                 <th>Date acquired:</th>
                 <td> {{ plant.date_acquired }} </td>
-            
             </tr>
             <tr>
                 <th>Source:</th>
@@ -47,10 +43,7 @@ td, th {
                 <th>Last watered:</th>
                 <td>{{ latest_watering.date}}</td>
             </tr>
-            
-
-            </table>
-
+        </table>
             <br>
             <form action= "{{ url_for ('update_plant', plant_id = plant.id) }}" method="GET">
                 <input type="submit" value="Update">
@@ -62,11 +55,9 @@ td, th {
             <br>
             <form action= "{{ url_for ('care', plant_id = plant.id) }}" method="POST">
                 <input type="submit" value="Care">
-                            
-
             </form>
-  </body>
-</html>
-    </body>
-</html>
+  
+        </body>
+        </html>
+
  

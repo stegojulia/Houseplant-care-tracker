@@ -3,7 +3,7 @@
         <title>Houseplant care tracker</title>
     </head>
     <body>
-      <a href="/home">Home</a>
+      <a href="/">Home</a>
       <a href="{{ url_for('plant', plant_id=plant.id) }}">Back to the plant</a>
       <h2>{{ legend }} : {{ plant.houseplant_name }}</h2>
       <br>
@@ -16,7 +16,6 @@
         {{ form.submit }}
         </form>
  <br><br>
-
       <div>
         <table>
           <th><h4>Watering records</h4></th>
@@ -28,7 +27,6 @@
               {% endfor %}
             </table>
       </div>
-
       <br>
 
   </body>
