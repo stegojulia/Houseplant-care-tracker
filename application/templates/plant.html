@@ -33,7 +33,10 @@ td, th {
             </tr>
             <tr>
                 <th>Date acquired:</th>
-                <td> {{ plant.date_acquired }} </td>
+                <td> {% if plant.date_acquired != None %}
+                    {{ plant.date_acquired }} 
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Source:</th>
