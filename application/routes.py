@@ -9,7 +9,7 @@ from wtforms.validators import DataRequired, Length
 
 import datetime
 
-class AddHouseplantForm(FlaskForm):
+class AddHouseplantForm(FlaskForm): 
     houseplant_name = StringField('Houseplant name', validators=[Length(min=3, max=20, message='Houseplant name has to be between 3 and 20 characters'), DataRequired()])
     species = StringField('Species')
     family = StringField('Family')

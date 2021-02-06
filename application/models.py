@@ -1,4 +1,5 @@
 from application import db
+from application import routes
 
 class Houseplants(db.Model):
     id = db.Column(db.Integer, primary_key=True)
