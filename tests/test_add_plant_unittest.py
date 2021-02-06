@@ -3,7 +3,8 @@ from flask_testing import TestCase
 from flask import url_for
 from datetime import datetime
 
-from add_plant import app, db, Houseplants, Waterings
+from application import db, app
+from application.models import Houseplants, Waterings
 
 class TestBase(TestCase):
 
