@@ -12,6 +12,9 @@ flask-sqlalchemy = "*"
 pymysql = "*"
 gunicorn = "*"
 flask-testing = "*"
+pip = "*"
+install = "*"
+pytest-cov = "*"
 
 [dev-packages]
 
