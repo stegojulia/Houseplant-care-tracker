@@ -34,12 +34,12 @@ The essential elements of the database were established in advance and visualise
 A Trello board was the main project management tool used. The board developed along with the project as my knowledge increased. Initially, it only included user stories with main features. Later I was able to decompose each story into smaller tasks. In addition to the MVP elements, I also added additional tasks which can be carried out to expand the app. I updated the board daily. Several times it became clear that what I initially thought was essential was not as important - and vice versa, so I adjusted the plan accordingly.
 
 <figure>
-<img src="Images/trello" alt="Trello-board" style="width:20;">
+<img src="Images/trello-early.png" alt="Trello-board" style="width:20;">
 <figcaption> Early version of the board with user stories. </figcaption>
 </figure>
 
 <figure>
-<img src="Images/trello" alt="Trello-board" style="width:20;">
+<img src="Images/trello.png" alt="Trello-board" style="width:20;">
 <figcaption> Trello board expanded with individual tasks </figcaption>
 </figure>
 
