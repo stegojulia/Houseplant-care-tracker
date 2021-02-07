@@ -15,6 +15,7 @@ flask-testing = "*"
 pip = "*"
 install = "*"
 pytest-cov = "*"
+cryptography = "*"
 
 [dev-packages]
 
