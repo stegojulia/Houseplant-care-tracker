@@ -10,7 +10,7 @@ from wtforms.validators import DataRequired, Length
 import datetime
 
 class AddHouseplantForm(FlaskForm): 
-    houseplant_name = StringField('Houseplant name', validators=[Length(min=3, max=20, message='Houseplant name has to be between 3 and 20 characters'), DataRequired()])
+    houseplant_name = StringField('Houseplant name', validators=[Length(min=3, max=45, message='Houseplant name has to be between 3 and 45 characters'), DataRequired()])
     species = StringField('Species')
     family = StringField('Family')
     date_acquired = DateField('Date acquired (YYYY-MM-DD)',format='%Y-%m-%d')
