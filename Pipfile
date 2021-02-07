@@ -16,6 +16,7 @@ pip = "*"
 install = "*"
 pytest-cov = "*"
 cryptography = "*"
+wheel = "*"
 
 [dev-packages]
 
