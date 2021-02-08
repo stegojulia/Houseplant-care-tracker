@@ -1,6 +1,9 @@
 # Houseplants care app
 I have a large collection of houseplants and I had an idea for a simple, easy to use app to keep track of their care requirements, such as watering, fertilising and repotting. This project aimed at creating a basic version of this app, which can come in handy when I need to prepare watering instructions for my partner or troubleshoot any issues with individual plants.
 
+## Set up
+Use requirements.txt or pipfile to install dependencies. Run create.py to create a database and add_plant.py to run the app.
+
 # Design
 
 ## Project specification
@@ -66,7 +69,7 @@ Unit testing with Pytest was implemented for automated testing of the CRUD funct
 Overall the project was successful in achieving the MVP in the time available. It was particularly useful to focus on prioritising tasks to ensure that a well functioning app was completed before adding features and small improvements. Of course, there were also challenges and learning points.
 
 ## What I would have done differently
-I found effective unit testing to be a challenging concept. In the future I would like to learn more and introduce a wider range of more sophisticated tests (e.g. random values). I will also introduce unit testing earlier in the process.
+I found effective unit testing to be a challenging concept. In the future I would like to learn more and introduce a wider range of more sophisticated tests (e.g. random values, testing incorrect input). I will also introduce unit testing earlier in the process.
 
 Some issues arose from failing to regularly update the requirements/pipfiles on the remote repository which affected the portability of the app. Running builds with Jenkins on a different machine were helpful in catching these problems.
 
